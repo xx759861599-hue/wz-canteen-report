@@ -1,0 +1,789 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>温职茶山校区档口新增品类调研报告</title>
+<style>
+  /* ===== Reset & Base ===== */
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { font-size: 16px; -webkit-text-size-adjust: 100%; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Helvetica Neue", "Microsoft YaHei", sans-serif;
+    background: #f5f2ed;
+    color: #2c2420;
+    line-height: 1.7;
+    padding: 0 0 60px 0;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ===== Header ===== */
+  .header {
+    position: relative;
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+    padding: 48px 20px 56px;
+    text-align: center;
+    overflow: hidden;
+  }
+  .header::before {
+    content: '';
+    position: absolute;
+    top: -60%;
+    left: -30%;
+    width: 160%;
+    height: 160%;
+    background: radial-gradient(ellipse at 30% 50%, rgba(255,183,77,0.08) 0%, transparent 60%),
+                radial-gradient(ellipse at 70% 30%, rgba(255,138,101,0.06) 0%, transparent 50%);
+    pointer-events: none;
+  }
+  .header-badge {
+    display: inline-block;
+    background: rgba(255,183,77,0.15);
+    color: #ffb74d;
+    font-size: 0.7rem;
+    letter-spacing: 2px;
+    padding: 4px 14px;
+    border-radius: 20px;
+    margin-bottom: 16px;
+    border: 1px solid rgba(255,183,77,0.2);
+  }
+  .header h1 {
+    font-size: 1.55rem;
+    font-weight: 700;
+    color: #fff;
+    letter-spacing: 2px;
+    line-height: 1.4;
+    position: relative;
+    text-shadow: 0 2px 20px rgba(0,0,0,0.3);
+  }
+  .header-sub {
+    margin-top: 12px;
+    font-size: 0.82rem;
+    color: rgba(255,255,255,0.55);
+    letter-spacing: 1px;
+    position: relative;
+  }
+  .header-sub span {
+    display: inline-block;
+    padding: 0 10px;
+  }
+  .header-sub span + span {
+    border-left: 1px solid rgba(255,255,255,0.15);
+  }
+
+  /* ===== Container ===== */
+  .container {
+    max-width: 640px;
+    margin: 0 auto;
+    padding: 0 16px;
+    position: relative;
+    margin-top: -20px;
+  }
+
+  /* ===== Cards ===== */
+  .card {
+    background: #fff;
+    border-radius: 14px;
+    padding: 24px 20px;
+    margin-bottom: 16px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+    position: relative;
+  }
+
+  .section-title {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #1a1a2e;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 18px;
+    letter-spacing: 1px;
+  }
+  .section-title .num {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 26px;
+    height: 26px;
+    background: #1a1a2e;
+    color: #fff;
+    font-size: 0.75rem;
+    font-weight: 600;
+    border-radius: 6px;
+    flex-shrink: 0;
+  }
+  .section-title::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, #e0d8d0 0%, transparent 100%);
+    margin-left: 6px;
+  }
+
+  /* ===== Tables ===== */
+  .table-wrap {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    margin: 0 -4px;
+    border-radius: 10px;
+    border: 1px solid #eee8e2;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.82rem;
+    min-width: 400px;
+  }
+  table th {
+    background: #f8f5f1;
+    color: #5a4a40;
+    font-weight: 600;
+    padding: 10px 8px;
+    text-align: left;
+    border-bottom: 1px solid #e8e0d8;
+    white-space: nowrap;
+    font-size: 0.75rem;
+    letter-spacing: 0.5px;
+  }
+  table td {
+    padding: 10px 8px;
+    border-bottom: 1px solid #f0ebe5;
+    vertical-align: top;
+  }
+  table tr:last-child td { border-bottom: none; }
+
+  /* ===== Tags ===== */
+  .tag {
+    display: inline-block;
+    font-size: 0.68rem;
+    padding: 2px 10px;
+    border-radius: 12px;
+    font-weight: 500;
+  }
+  .tag-green { background: #e8f5e9; color: #2e7d32; }
+  .tag-orange { background: #fff3e0; color: #e65100; }
+  .tag-blue { background: #e3f2fd; color: #1565c0; }
+  .tag-gray { background: #f5f5f5; color: #616161; }
+  .tag-red { background: #fbe9e7; color: #bf360c; }
+
+  /* ===== Recommendation Items ===== */
+  .rec-item {
+    background: #faf8f6;
+    border-radius: 12px;
+    padding: 18px 16px;
+    margin-bottom: 14px;
+    border-left: 3px solid #c8a882;
+  }
+  .rec-item.rec-top { border-left-color: #d4a373; }
+  .rec-item .rec-title {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: #2c2420;
+    margin-bottom: 10px;
+  }
+  .rec-item .rec-badge {
+    display: inline-block;
+    font-size: 0.6rem;
+    padding: 2px 8px;
+    border-radius: 10px;
+    font-weight: 600;
+    background: #d4a373;
+    color: #fff;
+  }
+  .rec-item .rec-badge.hot { background: #c0392b; }
+  .rec-item .rec-meta {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4px 12px;
+    font-size: 0.78rem;
+    color: #6b5a50;
+    margin-bottom: 8px;
+  }
+  .rec-item .rec-meta span { display: flex; align-items: center; gap: 4px; }
+  .rec-item .rec-desc {
+    font-size: 0.78rem;
+    color: #6b5a50;
+    line-height: 1.6;
+    margin-top: 6px;
+    padding-top: 8px;
+    border-top: 1px dashed #e8e0d8;
+  }
+  .rec-item .rec-risk {
+    font-size: 0.75rem;
+    color: #bf360c;
+    margin-top: 6px;
+    display: flex;
+    align-items: start;
+    gap: 4px;
+  }
+
+  /* ===== Stars ===== */
+  .stars { display: inline-flex; gap: 1px; }
+  .star { font-size: 0.75rem; }
+  .star.on { color: #e8a838; }
+  .star.off { color: #ddd5cc; }
+
+  /* ===== Rating Table ===== */
+  .rating-table td:first-child { font-weight: 600; white-space: nowrap; }
+  .rating-table .rec-level {
+    display: inline-block;
+    font-size: 0.65rem;
+    padding: 2px 10px;
+    border-radius: 12px;
+    font-weight: 600;
+    white-space: nowrap;
+  }
+  .rec-level.s { background: #1b5e20; color: #fff; }
+  .rec-level.a { background: #e65100; color: #fff; }
+  .rec-level.b { background: #888; color: #fff; }
+
+  /* ===== Strategy Section ===== */
+  .strategy-grid {
+    display: grid;
+    gap: 10px;
+  }
+  .strategy-item {
+    background: #faf8f6;
+    border-radius: 10px;
+    padding: 14px 16px;
+    border: 1px solid #eee8e2;
+  }
+  .strategy-item .s-title {
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: #2c2420;
+    margin-bottom: 6px;
+  }
+  .strategy-item .s-title .s-emoji { margin-right: 6px; }
+  .strategy-item .s-body {
+    font-size: 0.78rem;
+    color: #6b5a50;
+    line-height: 1.7;
+  }
+
+  /* ===== Timeline ===== */
+  .timeline {
+    position: relative;
+    padding-left: 20px;
+  }
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 6px;
+    top: 6px;
+    bottom: 6px;
+    width: 2px;
+    background: linear-gradient(180deg, #d4a373, #e8d5c0);
+    border-radius: 2px;
+  }
+  .tl-item {
+    position: relative;
+    padding: 0 0 16px 16px;
+  }
+  .tl-item:last-child { padding-bottom: 0; }
+  .tl-item::before {
+    content: '';
+    position: absolute;
+    left: -17px;
+    top: 6px;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: #d4a373;
+    border: 2px solid #fff;
+    box-shadow: 0 0 0 2px #d4a373;
+  }
+  .tl-item .tl-label {
+    font-size: 0.72rem;
+    color: #8a7a6e;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+  }
+  .tl-item .tl-body {
+    font-size: 0.82rem;
+    color: #3a322a;
+    margin-top: 2px;
+  }
+
+  /* ===== Pricing Table ===== */
+  .pricing {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 8px;
+    margin-top: 10px;
+  }
+  .pricing-item {
+    background: #faf8f6;
+    border-radius: 10px;
+    padding: 12px 10px;
+    text-align: center;
+    border: 1px solid #eee8e2;
+  }
+  .pricing-item .p-name {
+    font-size: 0.72rem;
+    color: #8a7a6e;
+    margin-bottom: 4px;
+  }
+  .pricing-item .p-price {
+    font-size: 1rem;
+    font-weight: 700;
+    color: #c0392b;
+  }
+  .pricing-item .p-price small {
+    font-size: 0.65rem;
+    font-weight: 400;
+    color: #8a7a6e;
+  }
+  .pricing-item .p-combo {
+    font-size: 0.65rem;
+    color: #6b5a50;
+    margin-top: 4px;
+    padding-top: 4px;
+    border-top: 1px dashed #e8e0d8;
+  }
+
+  /* ===== Cost Breakdown ===== */
+  .cost-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    margin-top: 12px;
+  }
+  .cost-item {
+    background: #faf8f6;
+    border-radius: 8px;
+    padding: 10px 12px;
+    text-align: center;
+    border: 1px solid #eee8e2;
+  }
+  .cost-item .c-amount {
+    font-size: 1rem;
+    font-weight: 700;
+    color: #1a1a2e;
+  }
+  .cost-item .c-label {
+    font-size: 0.68rem;
+    color: #8a7a6e;
+    margin-top: 2px;
+  }
+
+  /* ===== Divider ===== */
+  .divider {
+    text-align: center;
+    margin: 18px 0 10px;
+    position: relative;
+  }
+  .divider::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 50%;
+    height: 1px;
+    background: #e8e0d8;
+  }
+  .divider span {
+    background: #fff;
+    padding: 0 12px;
+    position: relative;
+    font-size: 0.72rem;
+    color: #8a7a6e;
+    letter-spacing: 2px;
+  }
+
+  /* ===== Footer ===== */
+  .footer {
+    text-align: center;
+    padding: 32px 20px 10px;
+    font-size: 0.7rem;
+    color: #aaa39a;
+    letter-spacing: 1px;
+  }
+  .footer a {
+    color: #8a7a6e;
+    text-decoration: none;
+    border-bottom: 1px solid #ddd5cc;
+  }
+
+  /* ===== Highlight Block ===== */
+  .highlight-box {
+    background: linear-gradient(135deg, #fff8f0, #fef3e0);
+    border: 1px solid #f0dcc0;
+    border-radius: 10px;
+    padding: 14px 16px;
+    margin-top: 12px;
+  }
+  .highlight-box .h-title {
+    font-size: 0.82rem;
+    font-weight: 700;
+    color: #8d6e3f;
+    margin-bottom: 4px;
+  }
+  .highlight-box .h-body {
+    font-size: 0.78rem;
+    color: #6b5a50;
+    line-height: 1.7;
+  }
+  .highlight-box .h-body strong { color: #bf360c; }
+
+  /* ===== Responsive ===== */
+  @media (max-width: 400px) {
+    .header h1 { font-size: 1.3rem; }
+    .rec-item .rec-meta { grid-template-columns: 1fr; }
+    .pricing { grid-template-columns: 1fr; }
+    .cost-grid { grid-template-columns: 1fr 1fr; }
+    .card { padding: 18px 14px; }
+    table { font-size: 0.75rem; min-width: 340px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ==================== HEADER ==================== -->
+<div class="header">
+  <div class="header-badge">RESEARCH REPORT</div>
+  <h1>温职茶山校区<br>档口新增品类调研报告</h1>
+  <div class="header-sub">
+    <span>温州职业技术学院</span>
+    <span>茶山校区</span>
+    <span>2026.04</span>
+  </div>
+</div>
+
+<div class="container">
+
+  <!-- ==================== 一、竞争格局 ==================== -->
+  <div class="card">
+    <div class="section-title"><span class="num">一</span>现有竞争格局</div>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th style="width:28%">档口</th><th>品类</th></tr>
+        </thead>
+        <tbody>
+          <tr style="background:#fff8f0;"><td><span class="tag tag-orange">11号·你</span></td><td><strong>瘦肉丸、肉燕、馄饨系列</strong></td></tr>
+          <tr><td>3号</td><td>吉祥馄饨</td></tr>
+          <tr><td>1号</td><td>鲜汁肉包</td></tr>
+          <tr><td>5号</td><td>酸菜鱼</td></tr>
+          <tr><td>7号</td><td>水饺</td></tr>
+          <tr><td>13号</td><td>酱香饼 / 豆浆</td></tr>
+          <tr><td>16号</td><td>麻辣烫</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="highlight-box" style="margin-top:14px;">
+      <div class="h-title">竞品缺口判断</div>
+      <div class="h-body">煎炸类、干拌类、铁板类小吃在该食堂一楼较少，和你现有的汤羹类产品形成 <strong>干湿搭配</strong>，可互相带量引流。</div>
+    </div>
+  </div>
+
+  <!-- ==================== 二、5个推荐品类 ==================== -->
+  <div class="card">
+    <div class="section-title"><span class="num">二</span>最优推荐品类</div>
+
+    <!-- 推荐一 -->
+    <div class="rec-item rec-top">
+      <div class="rec-title">
+        🥟 锅贴 / 煎饺
+        <span class="rec-badge">强烈推荐</span>
+      </div>
+      <div class="rec-meta">
+        <span>💰 毛利 <strong style="color:#2e7d32;">55%–65%</strong></span>
+        <span>⏱ 出餐 约5min / 锅</span>
+        <span>📦 售价 4–6 元 / 份</span>
+        <span>🧾 成本 ≈0.6元/个</span>
+      </div>
+      <div class="rec-desc">
+        <strong>适配理由：</strong>与瘦肉丸、馄饨形成经典干湿搭配套餐；温州本地高校早餐午餐刚需；温科院已验证锅贴+瘦肉丸模式可行。<br>
+        <strong>设备：</strong>电煎铛（与现有灶台兼容，无需排烟改造）<br>
+        <strong>试错成本：</strong>约 3,000–5,000 元
+      </div>
+      <div class="rec-risk">⚠ 出锅后口感随时间衰减快；夏季销量会降</div>
+    </div>
+
+    <!-- 推荐二 -->
+    <div class="rec-item rec-top">
+      <div class="rec-title">
+        🧀 铁板豆腐 / 铁板土豆
+        <span class="rec-badge hot">毛利之王</span>
+      </div>
+      <div class="rec-meta">
+        <span>💰 毛利 <strong style="color:#2e7d32;">70%–80%</strong></span>
+        <span>⏱ 出餐 2–3min</span>
+        <span>📦 售价 3–5 元 / 份</span>
+        <span>🧾 成本 ≈1元/份</span>
+      </div>
+      <div class="rec-desc">
+        <strong>适配理由：</strong>毛利率最高的品类；操作极简单；香气扩散强——天然的引流神器，能把远处学生吸引过来。<br>
+        <strong>设备：</strong>小型电热铁板炉 800–1,500 元<br>
+        <strong>试错成本：</strong>约 2,000–4,000 元
+      </div>
+      <div class="rec-risk">⚠ 学生吃多易腻，需定期微调酱料口味；铁板需定期清洁</div>
+    </div>
+
+    <!-- 推荐三 -->
+    <div class="rec-item">
+      <div class="rec-title">
+        🦪 花甲粉 / 粉丝类
+        <span class="rec-badge" style="background:#e65100;">冬季爆款</span>
+      </div>
+      <div class="rec-meta">
+        <span>💰 毛利 <strong style="color:#2e7d32;">55%–65%</strong></span>
+        <span>⏱ 出餐 3–5min</span>
+        <span>📦 售价 12–18 元</span>
+        <span>🧾 成本 5–7 元</span>
+      </div>
+      <div class="rec-desc">
+        <strong>适配理由：</strong>茶山大学城有"从冷清到排队"成功案例；和现有品类共用汤底设备；自带网红属性，学生爱拍照发圈。<br>
+        <strong>设备：</strong>小型汤灶（现有即可）<br>
+        <strong>试错成本：</strong>约 3,000–5,000 元
+      </div>
+      <div class="rec-risk">⚠ 花甲新鲜度影响口碑，夏季损耗率 8%–12%；价格波动大</div>
+    </div>
+
+    <!-- 推荐四 -->
+    <div class="rec-item">
+      <div class="rec-title">
+        🍢 炸串 / 炸鸡排
+        <span class="rec-badge" style="background:#888;">视排烟而定</span>
+      </div>
+      <div class="rec-meta">
+        <span>💰 毛利 <strong style="color:#2e7d32;">55%–65%</strong></span>
+        <span>⏱ 出餐 30s–2min</span>
+        <span>📦 串 2–3元 | 鸡排 8–10元</span>
+        <span>🧾 串成本0.6–1元</span>
+      </div>
+      <div class="rec-desc">
+        <strong>适配理由：</strong>流量王——炸物香气是大学食堂最强引流手段；南柳小吃街已验证茶山学生对炸物接受度极高。<br>
+        <strong>设备：</strong>电炸炉 1,500–3,000 元 + 需加强排烟（关键！）<br>
+        <strong>试错成本：</strong>约 5,000–8,000 元
+      </div>
+      <div class="rec-risk">⚠ 排烟是最大问题；夏季油腻感重；油品更换是持续耗材</div>
+    </div>
+
+    <!-- 推荐五 -->
+    <div class="rec-item rec-top">
+      <div class="rec-title">
+        🍜 葱油拌面 / 拌粉 + 特色浇头
+        <span class="rec-badge">强烈推荐</span>
+      </div>
+      <div class="rec-meta">
+        <span>💰 毛利 <strong style="color:#2e7d32;">60%–70%</strong></span>
+        <span>⏱ 出餐 30s–1min</span>
+        <span>📦 售价 6–10 元</span>
+        <span>🧾 成本 2–3 元</span>
+      </div>
+      <div class="rec-desc">
+        <strong>适配理由：</strong>出餐极快；和现有设备完全兼容几乎零投入；加牛肉羹/瘦肉羹做浇头，形成独家特色。<br>
+        <strong>设备：</strong>煮面锅（现有即可）<br>
+        <strong>试错成本：</strong>仅 500–1,500 元
+      </div>
+      <div class="rec-risk">⚠ 需确认食堂现有面食品类竞争情况；夏季可升级为冷拌面</div>
+    </div>
+
+  </div>
+
+  <!-- ==================== 三、综合评分表 ==================== -->
+  <div class="card">
+    <div class="section-title"><span class="num">三</span>综合评分对比</div>
+
+    <div class="table-wrap">
+      <table class="rating-table">
+        <thead>
+          <tr>
+            <th>品类</th>
+            <th style="text-align:center;">毛利</th>
+            <th style="text-align:center;">出餐</th>
+            <th style="text-align:center;">设备投入</th>
+            <th style="text-align:center;">适配</th>
+            <th style="text-align:center;">引流</th>
+            <th style="text-align:center;">评级</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>锅贴/煎饺</td>
+            <td style="text-align:center;"><span class="stars"><span class="star on">★</span><span class="star on">★</span><span class="star on">★</span><span class="star on">★</span><span class="star off">★</span></span></td>
+            <td style="text-align:center;"><span class="stars"><span class="star on">★</span><span class="star on">★</span><span class="star on">★</span><span class="star on">★</span><span class="star off">★</span></span></td>
+            <td style="text-align:center;"><span class="stars"><span class="star on">★</span><span class="star on">★</span><span class="star on">★</span><span class="star on">★</span><span class="star off">★</span></span></td>
+            <td style="text-align:center;"><span class="stars"><span class="star on">★</span><span class="star on">★</span><span class="star on">★</span><span class="star on">★</span><span class="star on">★</span></span></td>
+            <td style="text-align:center;"><span class="stars"><span class="star on">★</span><span class="star on">★</span><span class="star on">★</span><span class="star off">★</span><span class="star off">★</span></span></td>
+            <td style="text-align:center;"><span class="rec-level s">S</span></td>
+          </tr>
+          <tr>
+            <td>铁板豆腐</td>
+            <td style="text-align:center;"><span class="stars"><span class="star on">★</span><span class="star on">★</span><span class="star on">★</span><span class="star on">★</span><span class="star on">★</span></span></td>
+            <td style="text-align:center;"><span class="stars"><span class="star on">★</span><span class="star on">★</span><span class="star on">★</span><span class="star on">★</span><span class="star off">★</span></span></td>
+            <td style="text-align:center;"><span class="stars"><span class="star on">★</span><span class="star on">★</span><span class="star on">★</span><span class="star on">★</span><span class="star on">★</span></span></td>
+            <td style="text-align:center;"><span class="stars"><span class="star on">★</span><span class="star on">★</span><span class="star on">★</span><span class="star on">★</span><span class="star on">★</span></span></td>
+            <td style="text-align:center;"><span class="stars"><span class="star on">★</span><span class="star on">★</span><span class="star on">★</span><span class="star on">★</span><span class="star on">★</span></span></td>
+            <td style="text-align:center;"><span class="rec-level s">S</span></td>
+          </tr>
+          <tr>
+            <td>花甲粉</td>
+            <td style="text-align:center;"><span class="stars"><span class="star on">★</span><span class="star on">★</span><span class="star on">★</span><span class="star on">★</span><span class="star off">★</span></span></td>
+            <td style="text-align:center;"><span class="stars"><span class="star on">★</span><span class="star on">★</span><span class="star on">★</span><span class="star off">★</span><span class="star off">★</span></span></td>
+            <td style="text-align:center;"><span class="stars"><span class="star on">★</span><span class="star on">★</span><span class="star on">★</span><span class="star on">★</span><span class="star off">★</span></span></td>
+            <td style="text-align:center;"><span class="stars"><span class="star on">★</span><span class="star on">★</span><span class="star on">★</span><span class="star on">★</span><span class="star off">★</span></span></td>
+            <td style="text-align:center;"><span class="stars"><span class="star on">★</span><span class="star on">★</span><span class="star on">★</span><span class="star on">★</span><span class="star off">★</span></span></td>
+            <td style="text-align:center;"><span class="rec-level a">A</span></td>
+          </tr>
+          <tr>
+            <td>炸串/鸡排</td>
+            <td style="text-align:center;"><span class="stars"><span class="star on">★</span><span class="star on">★</span><span class="star on">★</span><span class="star on">★</span><span class="star off">★</span></span></td>
+            <td style="text-align:center;"><span class="stars"><span class="star on">★</span><span class="star on">★</span><span class="star on">★</span><span class="star on">★</span><span class="star on">★</span></span></td>
+            <td style="text-align:center;"><span class="stars"><span class="star on">★</span><span class="star on">★</span><span class="star off">★</span><span class="star off">★</span><span class="star off">★</span></span></td>
+            <td style="text-align:center;"><span class="stars"><span class="star on">★</span><span class="star on">★</span><span class="star on">★</span><span class="star on">★</span><span class="star off">★</span></span></td>
+            <td style="text-align:center;"><span class="stars"><span class="star on">★</span><span class="star on">★</span><span class="star on">★</span><span class="star on">★</span><span class="star on">★</span></span></td>
+            <td style="text-align:center;"><span class="rec-level b">B</span></td>
+          </tr>
+          <tr>
+            <td>葱油拌面</td>
+            <td style="text-align:center;"><span class="stars"><span class="star on">★</span><span class="star on">★</span><span class="star on">★</span><span class="star on">★</span><span class="star on">★</span></span></td>
+            <td style="text-align:center;"><span class="stars"><span class="star on">★</span><span class="star on">★</span><span class="star on">★</span><span class="star on">★</span><span class="star on">★</span></span></td>
+            <td style="text-align:center;"><span class="stars"><span class="star on">★</span><span class="star on">★</span><span class="star on">★</span><span class="star on">★</span><span class="star on">★</span></span></td>
+            <td style="text-align:center;"><span class="stars"><span class="star on">★</span><span class="star on">★</span><span class="star on">★</span><span class="star on">★</span><span class="star on">★</span></span></td>
+            <td style="text-align:center;"><span class="stars"><span class="star on">★</span><span class="star on">★</span><span class="star on">★</span><span class="star off">★</span><span class="star off">★</span></span></td>
+            <td style="text-align:center;"><span class="rec-level s">S</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div style="margin-top:10px; font-size:0.7rem; color:#8a7a6e; text-align:right;">S = 强烈推荐 ｜ A = 推荐 ｜ B = 视条件而定</div>
+  </div>
+
+  <!-- ==================== 四、淡季引流策略 ==================== -->
+  <div class="card">
+    <div class="section-title"><span class="num">四</span>淡季引流策略</div>
+
+    <div class="strategy-grid">
+      <div class="strategy-item">
+        <div class="s-title"><span class="s-emoji">🌸</span>上半年淡季（3月–6月）</div>
+        <div class="s-body">
+          主推 <strong>铁板豆腐、凉拌面</strong>——清爽不腻，女生群体尤其欢迎。<br>
+          套餐组合：瘦肉丸小份 + 铁板豆腐 = <strong>8元套餐</strong>，降低决策门槛。<br>
+          周三周四下午 2–4 点推"下午茶小食"，针对没课的学生。
+        </div>
+      </div>
+      <div class="strategy-item">
+        <div class="s-title"><span class="s-emoji">🍂</span>下半年旺季（9月–12月）</div>
+        <div class="s-body">
+          主推 <strong>花甲粉、锅贴</strong>——秋冬暖食，需求旺盛。<br>
+          开学季"新生套餐"：第一周推 <strong>1元加购活动</strong>，快速拉新建立口碑。
+        </div>
+      </div>
+      <div class="strategy-item">
+        <div class="s-title"><span class="s-emoji">🏖</span>寒暑假运营</div>
+        <div class="s-body">
+          寒假前 1 个月主动联系留校学生群，做 <strong>预订制</strong> 降低备货风险。<br>
+          暑假：设备维护保养 + 新品研发试制，为下学期做准备。
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== 五、试运营方案 ==================== -->
+  <div class="card">
+    <div class="section-title"><span class="num">五</span>试运营方案</div>
+
+    <div class="highlight-box" style="margin-bottom:14px;">
+      <div class="h-title">推荐组合：锅贴 + 铁板豆腐</div>
+      <div class="h-body">设备投入最低、毛利最高、与现有品类互补最强</div>
+    </div>
+
+    <div style="font-size:0.9rem; font-weight:700; color:#2c2420; margin-bottom:10px;">试卖周期：2 周</div>
+
+    <div class="timeline">
+      <div class="tl-item">
+        <div class="tl-label">第 1–3 天 · 准备期</div>
+        <div class="tl-body">采购设备（电煎铛 + 铁板炉）、定制菜单牌、备好酱料原料</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-label">第 4–5 天 · 试做期</div>
+        <div class="tl-body">内部试做，调整口味，确定标准化操作流程</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-label">第 6–14 天 · 试卖期</div>
+        <div class="tl-body">正式上架，每天限量供应，收集学生反馈</div>
+      </div>
+    </div>
+
+    <div class="divider"><span>备货量控制</span></div>
+
+    <div style="font-size:0.82rem; color:#3a322a; line-height:1.8; background:#faf8f6; border-radius:8px; padding:12px 14px;">
+      <div><strong>锅贴：</strong>首日 50 份（400 个），之后每天根据前一日销量 ±20% 调整</div>
+      <div style="margin-top:4px;"><strong>铁板豆腐：</strong>首日 30 份，视学生反应逐日调整</div>
+      <div style="margin-top:6px; color:#bf360c; font-size:0.75rem;">目标：试卖期不追求利润，验证口味接受度和操作流程</div>
+    </div>
+
+    <div class="divider"><span>定价建议</span></div>
+
+    <div class="pricing">
+      <div class="pricing-item">
+        <div class="p-name">锅贴（8个）</div>
+        <div class="p-price">5 <small>元</small></div>
+        <div class="p-combo">套餐 + 瘦肉丸 = 8 元</div>
+      </div>
+      <div class="pricing-item">
+        <div class="p-name">铁板豆腐</div>
+        <div class="p-price">4 <small>元</small></div>
+        <div class="p-combo">套餐 + 馄饨 = 8 元</div>
+      </div>
+      <div class="pricing-item">
+        <div class="p-name">锅贴+豆腐组合</div>
+        <div class="p-price">8 <small>元</small></div>
+        <div class="p-combo">一煎一铁板，学生最爱</div>
+      </div>
+    </div>
+
+    <div class="divider"><span>试错成本</span></div>
+
+    <div class="cost-grid">
+      <div class="cost-item">
+        <div class="c-amount">2,000</div>
+        <div class="c-label">电煎铛</div>
+      </div>
+      <div class="cost-item">
+        <div class="c-amount">1,000</div>
+        <div class="c-label">铁板炉</div>
+      </div>
+      <div class="cost-item">
+        <div class="c-amount">1,500</div>
+        <div class="c-label">首批食材 + 包材</div>
+      </div>
+      <div class="cost-item">
+        <div class="c-amount">500</div>
+        <div class="c-label">菜单牌 + 宣传</div>
+      </div>
+      <div class="cost-item">
+        <div class="c-amount">1,000</div>
+        <div class="c-label">预留损耗</div>
+      </div>
+      <div class="cost-item" style="background:#fff8f0; border-color:#f0dcc0;">
+        <div class="c-amount" style="color:#bf360c;">5,000–7,000</div>
+        <div class="c-label">总计</div>
+      </div>
+    </div>
+
+    <div class="highlight-box" style="margin-top:14px; border-color:#f0c8b8; background:#fef5f0;">
+      <div class="h-title" style="color:#bf360c;">止损线</div>
+      <div class="h-body">试卖期 2 周结束后，日均销量低于 <strong>30 份</strong> → 暂缓正式上线，重新调整口味或更换品类</div>
+    </div>
+
+  </div>
+
+  <!-- ==================== Footer ==================== -->
+  <div class="footer">
+    本报告由 Claude Code 基于网络调研生成 &nbsp;·&nbsp; 数据截至 2026 年 4 月
+  </div>
+
+</div>
+
+</body>
+</html>
